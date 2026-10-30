@@ -46,20 +46,23 @@
             }
             </style>
     </head>
-    <body>
+      <body>
         <center><img src="HelpDeskGirl.png" alt="Nuestra imagen corporativa" style="width:200px;height:150px;"></center>
         <center> <ul class="breadcrumb">
-            <li><a href="http://127.0.0.1:5500/loginClient.html">Login</a></li>
+            <!-- [TP] Agregamos la carpeta /HTML/ antes del loginClient.html -->
+            <li><a href="http://127.0.0.1:5500/HTML/loginClient.html">Login</a></li>
             <li>Listar tickets</li>
           </ul>
         </center>
         <center><h1>Sistema de Mesa de Ayuda</h1></center>
-        <center><h2>Tickets activos para usuario</h1></center>
+        <center><h2>Tickets activos para el usuario</h2></center>
+        
+        <!-- Muestra Cliente(ID), Nombre, Contacto y Fecha último ingreso -->
         <center><p id="lastlogin"></p></center>
         <center><p id="mensajes"></p></center>
         <center><div id="app"></div></center>
     
-        
         <script src="listarTicket.js" type="module"></script>
     
     </body>
+</html>

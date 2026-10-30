@@ -17,7 +17,9 @@ function getQueryParams(qs) {
 }
 
 /*---
-Extrae del URL el id de cliente ya validado, su nombre y la última fecha de login, actualiza banner de seguridad
+[TP] Extrae del URL el id de cliente, contacto (e-mail), nombre y última fecha
+de login, y actualiza el banner de cabecera con los datos requeridos:
+Cliente (ID), Nombre, Contacto y Último ingreso.
 */
 
 console.log("Comienza listarTicket.js");
@@ -25,10 +27,18 @@ console.log("Comienza listarTicket.js");
 var query = getQueryParams(document.location.search);
 console.log("id:"+query.id);
 console.log("contacto:"+query.contacto);
+console.log("nombre:"+query.nombre);
 console.log("ultima_fecha:"+query.fecha_ultimo_ingreso);
 console.log("mode:"+query.mode);
 
-document.getElementById("lastlogin").innerHTML = "<table><tr><td>Cliente</td><td>"+query.id+"</td></tr><tr><td>Contacto</td><td>"+query.contacto+"</td></tr></tr><tr><td>Ultimo ingreso</td><td>"+query.fecha_ultimo_ingreso+"</td></tr></table>";
+// [TP] Se muestra en pantalla: Cliente(ID), Nombre, Contacto y Último ingreso
+document.getElementById("lastlogin").innerHTML =
+    "<table>" +
+    "<tr><td>Cliente&nbsp;</td><td>" + query.id + "</td></tr>" +
+    "<tr><td>Nombre&nbsp;</td><td>" + (query.nombre || "") + "</td></tr>" +
+    "<tr><td>Contacto&nbsp;</td><td>" + (query.contacto || "") + "</td></tr>" +
+    "<tr><td>Último ingreso&nbsp;</td><td>" + (query.fecha_ultimo_ingreso || "") + "</td></tr>" +
+    "</table>";
 
 
 const systemURL={ 
@@ -42,6 +52,7 @@ const RESTAPI={
     loginCliente    : "http://127.0.0.1:8080/api/loginCliente",
     listarTicket    : "http://localhost:8080/api/listarTicket",
 };
+
 
 /*---
 Define que REST API server utilizará para obtener datos, el modo lo recibe como argumento
@@ -111,6 +122,14 @@ fetch(`${APIREST_URL}`,options)
     table.style.border="1px solid";
     table.style.backgroundColor="##626607";
 //ticket.uresponse.forEach((t)=> { 
+    // [TP] Verificación defensiva por si no viene .data
+    if (!ticket.data) {
+        console.log("sin datos de tickets");
+        document.getElementById('mensajes').style.textAlign = "center";
+        document.getElementById('mensajes').style.color="RED";
+        document.getElementById("mensajes").innerHTML = "No hay tickets pendientes";
+        return;
+    }
     ticket.data.forEach((t)=> { 
         console.log(t.clienteID)
         if (t.clienteID == query.id) {
