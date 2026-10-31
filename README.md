@@ -1,6 +1,6 @@
 # Trabajo Práctico Final Integrador - Mesa de Ayuda
-**Materia:** Ingeniería de Software I - UADER FCyT
-**Integrantes:** [Tu Nombre y el de tu compañera]
+**Materia:** Ingeniería de Software 1 - UADER FCyT
+**Integrantes:** Lavergne Elizabeth y Roude Mariel
 **Año:** 2026
 
 ## Descripción del Proyecto
